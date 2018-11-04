@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hallo {{ nama }}</h1>
+        <p v-once v-on:click="checkjts" >ini adalah halaman buatan {{ nama }}</p>
+        <p v-if="jts">Jakarta Techo Solution</p>
+
+        <ol>
+            <li v-for="data in anggota">{{ data }}</li>
+        </ol>
+
+        <img v-bind:src=gambar1><br>
+
+        Nama : <input type="text" height="100" v-model="nama" v-on:keyup.alt.81="changeImg">
+
+        <p v-html="dataHTML"></p>
+    </div>
+    <script>
+        reja = new Vue({
+            el: ".container",
+            data: {
+                nama: "Reja",
+                jts: true,
+                dataHTML: "<b>TEST</b>",
+                gambar1 : "https://assets.ubuntu.com/v1/c5cb0f8e-picto-ubuntu.svg",
+                statusGambar : "gambar1",
+                anggota: [
+                    "reja",
+                    "didit",
+                    "ikhsan",
+                    "yudhis",
+                    "bule DKI"
+                ]
+            },
+            methods: {
+                checkjts : function(){
+                    console.log("fungsi check jalan")
+                    if (this.nama == "yudhis"){
+                        this.jts = false
+                    }else{
+                        this.jts = true
+                    }
+                },
+                rubahIkhsan: function(){
+                    this.nama = "Ikhsan"
+                },
+                changeImg: function(){
+                    if (this.statusGambar == "gambar1"){
+                        this.gambar1 = "https://assets.ubuntu.com/v1/1db850da-K8s+logo.svg"
+                        this.statusGambar = "gambar2"
+                    }else{
+                        this.gambar1 = "https://assets.ubuntu.com/v1/c5cb0f8e-picto-ubuntu.svg"
+                        this.statusGambar = "gambar1"
+                    }
+                }
+            },
+            watch: {
+                jts: function(value){
+                    console.log("jts dirubah menjadi " + value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
